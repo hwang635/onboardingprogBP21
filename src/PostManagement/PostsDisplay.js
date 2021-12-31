@@ -9,7 +9,6 @@ const airtableConfig = {
   apiKey: process.env.REACT_APP_AIRTABLE_USER_KEY,
   baseKey: process.env.REACT_APP_AIRTABLE_BASE_KEY,
 };
-
 const base = new Airtable({ apiKey: airtableConfig.apiKey })
   .base(airtableConfig.baseKey);
 
@@ -25,8 +24,8 @@ function PostsDisplay({ numPosts }) {
       });
   };
 
-  // Use useEffect hook to call getPosts 1x at component mount
-  /* Second arg [] is the dependency array, useEffect reruns whenever a dependency changes
+  /* Use useEffect hook to call getPosts 1x at component mount
+    Second arg [] is the dependency array, useEffect reruns whenever a dependency changes
     If [] is empty, this hook doesn't depend on anything + will never rerun
   useEffect(getPosts, []); */
 

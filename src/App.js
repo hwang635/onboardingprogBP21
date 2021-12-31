@@ -22,8 +22,7 @@ function App() {
   };
 
   return (
-    <div>
-      <h1> I love Blueprint and onboarding! </h1>
+    <div className="centered">
       {/* Data flows DOWN from parent to child */}
       <PostsDisplay numPosts={numPosts} />
       {/* Events can flow UP from child to parent */}

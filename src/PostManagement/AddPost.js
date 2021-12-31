@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 // airtable configuration
@@ -9,15 +10,34 @@ const airtableConfig = {
   apiKey: process.env.REACT_APP_AIRTABLE_USER_KEY,
   baseKey: process.env.REACT_APP_AIRTABLE_BASE_KEY,
 };
-
 const base = new Airtable({ apiKey: airtableConfig.apiKey })
   .base(airtableConfig.baseKey);
+
+const useStyles = makeStyles({ // Only for styling purposes
+  formContainer: {
+    width: '30%',
+    marginLeft: '5%',
+    marginBottom: '5px',
+    borderRadius: '6px',
+  },
+  inputFields: {
+    width: '100%',
+    fontSize: '15px',
+    margin: '1px 1px 1px 1px',
+  },
+  button: {
+    backgroundColor: '#1DA1F2',
+    marginTop: '12px',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});
 
 // Represents form to submit new post w/ author + body, then creates record in Airtable
 export default function AddPost({ updateNumPosts }) {
   // Hooks to store/update author + body of new post, set to default strings
-  const [author, setAuthor] = useState('No author');
-  const [body, setBody] = useState('No body');
+  const [author, setAuthor] = useState('');
+  const [body, setBody] = useState('');
 
   // Update author/body whenever input changes
   // setAuthor/Body can't be called directly thru fx passing in TextField
@@ -46,25 +66,34 @@ export default function AddPost({ updateNumPosts }) {
       }
     });
 
+    // Clear author + body input fields, update # posts for rerendering
+    setAuthor('');
+    setBody('');
     updateNumPosts();
   };
 
+  const classes = useStyles();
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={classes.formContainer}>
       {/* Interactive textfields to enter author + body text */}
       <TextField
-        helperText="Enter your name"
+        helperText="Username"
         label="Author"
+        value={author}
         onChange={handleAuthorChange}
+        className={classes.inputFields}
       />
       <TextField
-        helperText="Enter your post"
+        helperText="What's happening?"
         label="Body"
+        value={body}
+        multiline
         onChange={handleBodyChange}
+        className={classes.inputFields}
       />
       {/* When the submit button is pressed, handleSubmit will be called */}
-      <Button variant="contained" color="primary" type="submit">
-        Submit
+      <Button variant="contained" type="submit" className={classes.button}>
+        POST
       </Button>
     </form>
   );
