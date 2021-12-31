@@ -1,3 +1,7 @@
+SCREENSHOT:
+
+![onboarding project screenshot](https://github.com/hwang635/onboardingprogBP21/blob/master/bp%20onboarding%20screenshot.PNG)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
