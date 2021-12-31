@@ -12,7 +12,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020, // Changed to allow dynamic imports
     sourceType: 'module',
   },
   plugins: ['react', 'react-hooks'],
